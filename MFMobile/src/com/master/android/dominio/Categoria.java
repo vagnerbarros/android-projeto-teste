@@ -3,23 +3,23 @@ package com.master.android.dominio;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.R;
+import com.master.android.R;
 
 public class Categoria {
 
-	private static String CONSULTORIO = "Consultório Médico";
-	private static String REPARTICAO = "Repartição Pública";
-	private static String AGENCIA = "Agência Bancária";
-	private static String CARTORIO = "Cartório";
+	private static String CONSULTORIO = "Consultórios Médicos";
+	private static String REPARTICAO = "Repartições Públicas";
+	private static String AGENCIA = "Agências Bancárias";
+	private static String CARTORIO = "Cartórios";
 	private static String PREFEITURA = "Prefeitura e setores vinculados";
 	private static String OUTRO = "Outros";
 	
-	private static int ICONE_CONSULTORIO = R.drawable.btn_default;
-	private static int ICONE_REPARTICAO = R.drawable.btn_default;
-	private static int ICONE_AGENCIA = R.drawable.btn_default;
-	private static int ICONE_CARTORIO = R.drawable.btn_default;
-	private static int ICONE_PREFEITURA = R.drawable.btn_default;
-	private static int ICONE_OUTRO = R.drawable.btn_default;
+	private static int ICONE_CONSULTORIO = R.drawable.icon_consultorio;
+	private static int ICONE_REPARTICAO = R.drawable.icon_reparticoes;
+	private static int ICONE_AGENCIA = R.drawable.icon_bancos;
+	private static int ICONE_CARTORIO = R.drawable.icon_cartorios;
+	private static int ICONE_PREFEITURA = R.drawable.icon_prefeitura;
+	private static int ICONE_OUTRO = R.drawable.icon_outros;
 	
 	private String nome;
 	private int icone;

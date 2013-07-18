@@ -22,5 +22,7 @@
     <string name="txt_voltar_login">Voltar para Login</string>
     <string name="title_activity_recuperar_senha">RecuperarSenhaActivity</string>
     <string name="title_activity_categorias">CategoriasActivity</string>
+    <string name="desc_icone_lista">IconeDaLista</string>
+    
 
 </resources>
