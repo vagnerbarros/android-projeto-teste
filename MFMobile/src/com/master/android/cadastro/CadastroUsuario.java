@@ -1,7 +1,6 @@
 package com.master.android.cadastro;
 
-import masterfila.entidade.Usuario;
-
+import com.master.android.entidade.Usuario;
 import com.master.android.repositorio.RepositorioUsuario;
 
 public class CadastroUsuario {
