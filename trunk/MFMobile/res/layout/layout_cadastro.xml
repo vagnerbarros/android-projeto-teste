@@ -83,7 +83,7 @@
                 android:textColorHint="#BDBFC1" />
             
             <EditText
-                android:id="@+id/txtEmail"
+                android:id="@+id/txtEmailRecuperacao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/txtCpf"
@@ -102,9 +102,9 @@
                 android:id="@+id/txtSenha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/txtEmail"
-                android:layout_alignRight="@+id/txtEmail"
-                android:layout_alignTop="@+id/txtEmail"
+                android:layout_alignLeft="@+id/txtEmailRecuperacao"
+                android:layout_alignRight="@+id/txtEmailRecuperacao"
+                android:layout_alignTop="@+id/txtEmailRecuperacao"
                 android:layout_marginTop="60dp"
                 android:background="@drawable/edit_text_borda"
                 android:ems="10"

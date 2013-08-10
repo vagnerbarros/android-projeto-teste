@@ -1,22 +1,25 @@
 package com.master.android.activity;
 
-import com.master.android.R;
-
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import com.master.android.R;
 
 public class LoginActivity extends Activity implements OnClickListener {
 	
-	Button btCriarConta;
-	Button btConectar;
-	TextView txBtEsqueciSenha;
+	private EditText txtEmail;
+	private EditText txtSenha;
+	private Button btCriarConta;
+	private Button btConectar;
+	private TextView txBtEsqueciSenha;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,24 +36,34 @@ public class LoginActivity extends Activity implements OnClickListener {
 		btConectar = (Button) findViewById(R.id.btConectar);
 		btConectar.setOnClickListener(this);
 		
+		txtEmail = (EditText) findViewById(R.id.txtEmailRecuperacao);
+		txtSenha = (EditText) findViewById(R.id.txtSenha);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
 	}
 
 	@Override
 	public void onClick(View v) {
-		if(v.equals(btCriarConta)){
-			startActivity(new Intent(LoginActivity.this,CadastroActivity.class));
-			this.onDestroy();
-		}else if(v.equals(txBtEsqueciSenha)){
+		if(v.getId() == R.id.btCriarConta){
+			startActivity(new Intent(this, CadastroActivity.class));
+			
+		}else if(v.getId() == R.id.textViewEsqueciSenha){
 			startActivity(new Intent(LoginActivity.this,RecuperarSenhaActivity.class));
-		}else if(v.equals(btConectar)){
-			startActivity(new Intent(LoginActivity.this,CategoriasActivity.class));
+			
+		}else if(v.getId() == R.id.btConectar){
+			logar();
 		}
+	}
+	
+	private void logar(){
+		
+		String email = txtEmail.getText().toString();
+		String senha = txtSenha.getText().toString();
+		
+		startActivity(new Intent(LoginActivity.this,CategoriasActivity.class));
 	}
 }
