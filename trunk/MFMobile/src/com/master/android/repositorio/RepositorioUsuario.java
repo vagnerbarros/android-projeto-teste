@@ -7,6 +7,7 @@ import java.sql.Statement;
 
 import android.content.ContextWrapper;
 
+import com.master.android.entidade.Usuario;
 import com.master.android.util.GerenteConexao;
 
 public class RepositorioUsuario {
