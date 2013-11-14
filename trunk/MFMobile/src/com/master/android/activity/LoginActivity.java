@@ -5,13 +5,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,12 +23,11 @@ import android.widget.Toast;
 import com.master.android.R;
 import com.master.android.util.Criptografia;
 
-@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 public class LoginActivity extends Activity implements OnClickListener {
 
 	private final int RECUPERAR = 1;
 	private final int CADASTRAR = 2; 
-	
+
 	private EditText txtEmail;
 	private EditText txtSenha;
 	private Button btCriarConta;
@@ -75,7 +73,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 			logar();
 		}
 	}
-	
+
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
@@ -89,20 +87,41 @@ public class LoginActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
-	@SuppressLint("NewApi")
 	private void logar() {		
-
-		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-		StrictMode.setThreadPolicy(policy);
-
 
 		String email = txtEmail.getText().toString();
 		String senha = txtSenha.getText().toString();
+		
+		OperacaoTask op = new OperacaoTask(this, email, senha);
+		op.execute();
+	}
+}
+
+class OperacaoTask extends AsyncTask<Void, Void, Boolean>  {
+	private ProgressDialog dialog;
+	private Context context;
+	private String email;
+	private String senha;
+
+	public OperacaoTask(Context context, String e, String s) {
+		this.context = context;
+		this.email = e;
+		this.senha = s;
+	}
+
+	@Override
+	protected void onPreExecute() {
+		dialog = new ProgressDialog(context);
+		dialog.setMessage("Aguarde...");
+		dialog.show();
+	}
+
+	@Override
+	protected Boolean doInBackground(Void... params) {
 
 		String consulta = "login=" + email + "&senha=" + Criptografia.encryptPassword(senha); 
 		String link = "http://10.0.2.2:8080/MasterFila/controlador?acao=logar_android&" + consulta;
-
+		Boolean retorno = false;
 		try{
 
 			URL url = new URL(link);
@@ -113,10 +132,10 @@ public class LoginActivity extends Activity implements OnClickListener {
 			conexao.setRequestMethod("GET");
 
 			if(conexao.getResponseCode() == HttpURLConnection.HTTP_OK){
-				startActivity(new Intent(LoginActivity.this,CategoriasActivity.class));
+				retorno = true;
 			}
 			else{
-				Toast.makeText(this, "Email/Senha Incorretos.", Toast.LENGTH_SHORT).show();
+				retorno = false;
 			}
 
 		} catch (MalformedURLException e) {
@@ -124,6 +143,24 @@ public class LoginActivity extends Activity implements OnClickListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		
+		
+		return retorno;
+	}
+
+	@Override
+	protected void onProgressUpdate(Void... values) {
+		dialog.setMessage("Aguarde ...");
+	}
+
+	@Override
+	protected void onPostExecute(Boolean ok) {
+		dialog.dismiss();
+		if(ok){
+			Intent i = new Intent(context, CategoriasActivity.class);
+			context.startActivity(i);
+		}
+		else{
+			Toast.makeText(context, "Email/Senha Incorretos.", Toast.LENGTH_SHORT).show();
+		}
 	}
 }
-
