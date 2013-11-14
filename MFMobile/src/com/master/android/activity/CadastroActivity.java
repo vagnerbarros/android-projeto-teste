@@ -2,19 +2,18 @@ package com.master.android.activity;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
-import android.os.Build;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -72,63 +71,96 @@ public class CadastroActivity extends Activity implements OnClickListener {
 		}
 	}
 	
-	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
-	@SuppressLint("NewApi")
 	private void cadastrar(){
-		
-		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-		StrictMode.setThreadPolicy(policy);
-		
 		
 		String nome = txtNome.getText().toString();
 		String cpf = txtCpf.getText().toString();
 		String email = txtEmail.getText().toString();
 		String senha = txtSenha.getText().toString();
 		String reSenha = txtReSenha.getText().toString();
-		
+
 		if(!senha.equals("") && !reSenha.equals("") && senha.equals(reSenha)){
 			
-			try{
-				
-				JSONObject usuario = new JSONObject();
+			JSONObject usuario = new JSONObject();
+			try {
 				usuario.put("nome", nome);
 				usuario.put("cpf", cpf);
 				usuario.put("email", email);
 				usuario.put("senha", senha);
 				
-				
 				String link = "http://10.0.2.2:8080/MasterFila/controlador?acao=cadastrar&json=" + usuario;
-				URL url = new URL(link);
-				HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
-
-				conexao.setDoOutput(false);
-				conexao.setDoInput(true);
-				conexao.setRequestMethod("GET");
-
-				if(conexao.getResponseCode() == HttpURLConnection.HTTP_OK){
-					Toast.makeText(this, "Cadastrado com Sucesso.", Toast.LENGTH_SHORT).show();
-					setResult(RESULT_OK);
-					limparCampos();
-				}
-				else{
-					Toast.makeText(this, "Erro ao Tentar Cadastrar", Toast.LENGTH_SHORT).show();					
-				}				
-				
-			}catch(JSONException e){
-				e.printStackTrace();
-			} catch (ProtocolException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
+				OperacaoCadastrar op = new OperacaoCadastrar(this, link);
+				op.execute();
+				finish();
+			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 	
-	private void limparCampos(){
-		txtCpf.setText("");
-		txtEmail.setText("");
-		txtNome.setText("");
-		txtReSenha.setText("");
-		txtSenha.setText("");
+}
+
+class OperacaoCadastrar extends AsyncTask<Void, Void, Boolean>  {
+	
+	private ProgressDialog dialog;
+	private Context context;
+	private String link;
+
+	public OperacaoCadastrar(Context context, String l) {
+		this.context = context;
+		this.link = l;
+	}
+
+	@Override
+	protected void onPreExecute() {
+		dialog = new ProgressDialog(context);
+		dialog.setMessage("Aguarde...");
+		dialog.show();
+	}
+
+	@Override
+	protected Boolean doInBackground(Void... params) {
+
+		Boolean retorno = false;
+		try{
+
+			URL url = new URL(link);
+			HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+
+			conexao.setDoOutput(false);
+			conexao.setDoInput(true);
+			conexao.setRequestMethod("GET");
+
+			if(conexao.getResponseCode() == HttpURLConnection.HTTP_OK){
+				retorno = true;
+			}
+			else{
+				retorno = false;
+			}
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+		
+		return retorno;
+	}
+
+	@Override
+	protected void onProgressUpdate(Void... values) {
+		dialog.setMessage("Aguarde ...");
+	}
+
+	@Override
+	protected void onPostExecute(Boolean ok) {
+		dialog.dismiss();
+		if(ok){
+			Toast.makeText(context, "Cadastrado com Sucesso.", Toast.LENGTH_SHORT).show();
+			((Activity)context).setResult(Activity.RESULT_OK);
+		}
+		else{
+			Toast.makeText(context, "Erro ao Tentar Cadastrar", Toast.LENGTH_SHORT).show();
+		}
 	}
 }
