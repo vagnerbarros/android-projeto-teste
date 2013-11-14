@@ -7,24 +7,35 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name="com.master.android.activity.LoginActivity" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.CadastroActivity"></activity>
-        <activity android:name=".activity.CategoriasActivity"></activity>
-        <activity android:name=".activity.RecuperarSenhaActivity"></activity>
-        
-        
+        <activity android:name="com.master.android.activity.CadastroActivity" >
+        </activity>
+        <activity android:name="com.master.android.activity.CategoriasActivity" >
+        </activity>
+        <activity android:name="com.master.android.activity.RecuperarSenhaActivity" >
+        </activity>
+        <activity
+            android:name="com.master.android.activity.EstabelecimentosActivity"
+            android:label="@string/title_activity_estabelecimentos" >
+        </activity>
+        <activity
+            android:name="com.master.android.activity.ChamarSenhaActivity"
+            android:label="@string/title_activity_chamar_senha" >
+        </activity>
     </application>
 
 </manifest>
