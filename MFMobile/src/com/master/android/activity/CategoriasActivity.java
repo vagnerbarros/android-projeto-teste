@@ -35,6 +35,9 @@ public class CategoriasActivity extends ListActivity {
 		Intent intent = new Intent(getApplicationContext(), EstabelecimentosActivity.class);
 		startActivity(intent);
 		
+		Categoria evento = (Categoria) this.getListAdapter().getItem(position);
+	//	Intent intent = new Intent(getApplicationContext(), DetalharEventoActivity.class);
+	//	startActivity(intent);
 	}
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
