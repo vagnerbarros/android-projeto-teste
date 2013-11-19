@@ -4,7 +4,7 @@
     <string name="app_name">MasterFila</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="txtEmail">Email :.</string>
+    <string name="txtEmail">Login :.</string>
     <string name="txtDigiteEmail">Digite seu Email :.</string>
     <string name="txtSenha">Senha :.</string>
     <string name="txtNomeCompleto">Nome Completo :.</string>
