@@ -36,6 +36,14 @@
             android:name="com.master.android.activity.ChamarSenhaActivity"
             android:label="@string/title_activity_chamar_senha" >
         </activity>
+        <activity
+            android:name="com.master.android.activity.SlidingPaneLayout"
+            android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name="com.master.android.activity.SlidingPanelLayout"
+            android:label="@string/title_activity_sliding_panel_layout" >
+        </activity>
     </application>
 
 </manifest>
