@@ -1,14 +1,6 @@
 package com.master.android.activity;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -54,7 +46,6 @@ public class RecuperarSenhaActivity extends Activity implements OnClickListener 
 		if(v.getId() == R.id.btRecuperar){
 			if(!txtEmail.getText().toString().equals("")){
 				setResult(RESULT_OK);
-				enviarSolicitacao(txtEmail.getText().toString());
 				finish();
 			}
 			else{
@@ -65,61 +56,4 @@ public class RecuperarSenhaActivity extends Activity implements OnClickListener 
 		}
 	}
 
-	private void enviarSolicitacao(String email){
-		OperacaoRecuperarSenha op = new OperacaoRecuperarSenha(this, email);
-		op.execute();
-	}
-	
-	class OperacaoRecuperarSenha extends AsyncTask<Void, Void, Void>  {
-
-		private ProgressDialog dialog;
-		private Context context;
-		private String email;
-
-		public OperacaoRecuperarSenha(Context context, String e) {
-			this.context = context;
-			this.email = e;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			dialog = new ProgressDialog(context);
-			dialog.setMessage("Aguarde...");
-			dialog.show();
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-
-			String consulta = "email=" + email; 
-			String link = "http://10.0.2.2:8080/MasterFila/controlador?acao=recuperar_senha&" + consulta;
-			try{
-
-				URL url = new URL(link);
-				HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
-
-				conexao.setDoOutput(false);
-				conexao.setDoInput(true);
-				conexao.setRequestMethod("GET");
-				
-				conexao.getResponseCode();
-
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}	
-			return null;
-		}
-
-		@Override
-		protected void onProgressUpdate(Void... values) {
-			dialog.setMessage("Aguarde ...");
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			dialog.dismiss();
-		}
-	}
 }

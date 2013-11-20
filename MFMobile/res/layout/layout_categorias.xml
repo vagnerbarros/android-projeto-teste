@@ -29,44 +29,75 @@
             android:src="@drawable/logo_topo" />
 
         <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            />
-
-        <Button
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            />
-
+            android:layout_alignParentTop="true" />
     </RelativeLayout>
 
-    <ScrollView
-        android:id="@+id/scrollView1"
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/relativeLayout1"
+        android:background="#FFFFFF"
+        android:padding="10dp" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/textView2"
+                    android:padding="5dp"
+                    android:text="Caruaru - PE" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView1"
+                    android:layout_alignBottom="@+id/textView1"
+                    android:layout_alignParentRight="true"
+                    android:clickable="true"
+                    android:padding="5dp"
+                    android:textColor="@drawable/txt_link_main"
+                    android:background="@drawable/txt_link_bg"
+                    android:text="@string/alterarCategoria" />
+                
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout1" >
+        android:layout_below="@+id/relativeLayout2" >
 
-        <LinearLayout
+        <ListView
+            android:id="@+id/listaCategoriasPlinio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <ExpandableListView
-                android:id="@+id/expandableListView1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-            </ExpandableListView>
-
-        </LinearLayout>
-    </ScrollView>
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true" >
+        </ListView>
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -4,7 +4,7 @@
     <string name="app_name">MasterFila</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="txtEmail">Login :.</string>
+    <string name="txtEmail">Email :.</string>
     <string name="txtDigiteEmail">Digite seu Email :.</string>
     <string name="txtSenha">Senha :.</string>
     <string name="txtNomeCompleto">Nome Completo :.</string>
@@ -29,5 +29,8 @@
     <string name="desc_icone_lista">IconeDaLista</string>
     <string name="title_activity_estabelecimentos">EstabelecimentosActivity</string>
     <string name="title_activity_chamar_senha">ChamarSenhaActivity</string>
-
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_sliding_panel_layout">SlidingPanelLayout</string>
+    <string name="alterarCategoria">Alterar Categoria</string>
+    
 </resources>

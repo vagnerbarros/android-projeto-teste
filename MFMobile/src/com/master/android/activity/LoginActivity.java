@@ -26,7 +26,7 @@ import com.master.android.util.Criptografia;
 public class LoginActivity extends Activity implements OnClickListener {
 
 	private final int RECUPERAR = 1;
-	private final int CADASTRAR = 2; 
+	private final int CADASTRAR = 2;
 
 	private EditText txtEmail;
 	private EditText txtSenha;
@@ -36,6 +36,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.layout_login);
@@ -51,6 +52,16 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 		txtEmail = (EditText) findViewById(R.id.txtEmailRecuperacao);
 		txtSenha = (EditText) findViewById(R.id.txtSenha);
+		
+	}
+
+	public void abrirMenu(View v) {
+		// // Se estive aberto, feche. Senão abra.
+		// if (mSlidingLayout.isOpen()) {
+		// mSlidingLayout.closePane();
+		// } else {
+		// mSlidingLayout.openPane();
+		// }
 	}
 
 	@Override
@@ -61,15 +72,16 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		if(v.getId() == R.id.btCriarConta){
+		if (v.getId() == R.id.btCriarConta) {
 			Intent i = new Intent(this, CadastroActivity.class);
 			startActivityForResult(i, CADASTRAR);
 
-		}else if(v.getId() == R.id.textViewEsqueciSenha){
-			Intent i = new Intent(LoginActivity.this,RecuperarSenhaActivity.class);
+		} else if (v.getId() == R.id.textViewEsqueciSenha) {
+			Intent i = new Intent(LoginActivity.this,
+					RecuperarSenhaActivity.class);
 			startActivityForResult(i, RECUPERAR);
 
-		}else if(v.getId() == R.id.btConectar){
+		} else if (v.getId() == R.id.btConectar) {
 			logar();
 		}
 	}
@@ -77,27 +89,31 @@ public class LoginActivity extends Activity implements OnClickListener {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		if(resultCode == RESULT_OK){
-			if(requestCode == RECUPERAR){
-				Toast.makeText(this, "Uma nova senha foi enviada para seu e-mail", Toast.LENGTH_LONG).show();
-			}
-			else if(requestCode == CADASTRAR){
-				Toast.makeText(this, "Agora você já pode logar", Toast.LENGTH_LONG).show();
+		if (resultCode == RESULT_OK) {
+			if (requestCode == RECUPERAR) {
+				Toast.makeText(this,
+						"Uma nova senha foi enviada para seu e-mail",
+						Toast.LENGTH_LONG).show();
+			} else if (requestCode == CADASTRAR) {
+				Toast.makeText(this, "Agora você já pode logar",
+						Toast.LENGTH_LONG).show();
 			}
 		}
 	}
 
-	private void logar() {		
+	private void logar() {
 
 		String email = txtEmail.getText().toString();
 		String senha = txtSenha.getText().toString();
-		
+
 		OperacaoTask op = new OperacaoTask(this, email, senha);
 		op.execute();
 	}
+
 }
 
-class OperacaoTask extends AsyncTask<Void, Void, Boolean>  {
+class OperacaoTask extends AsyncTask<Void, Void, Boolean> {
+	
 	private ProgressDialog dialog;
 	private Context context;
 	private String email;
@@ -119,22 +135,24 @@ class OperacaoTask extends AsyncTask<Void, Void, Boolean>  {
 	@Override
 	protected Boolean doInBackground(Void... params) {
 
-		String consulta = "login=" + email + "&senha=" + Criptografia.encryptPassword(senha); 
-		String link = "http://10.0.2.2:8080/MasterFila/controlador?acao=logar_android&" + consulta;
+		String consulta = "login=" + email + "&senha="
+				+ Criptografia.encryptPassword(senha);
+		String link = "http://10.0.2.2:8080/MasterFila/controlador?acao=logar_android&"
+				+ consulta;
 		Boolean retorno = false;
-		try{
+		try {
 
 			URL url = new URL(link);
-			HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+			HttpURLConnection conexao = (HttpURLConnection) url
+					.openConnection();
 
 			conexao.setDoOutput(false);
 			conexao.setDoInput(true);
 			conexao.setRequestMethod("GET");
 
-			if(conexao.getResponseCode() == HttpURLConnection.HTTP_OK){
+			if (conexao.getResponseCode() == HttpURLConnection.HTTP_OK) {
 				retorno = true;
-			}
-			else{
+			} else {
 				retorno = false;
 			}
 
@@ -142,8 +160,8 @@ class OperacaoTask extends AsyncTask<Void, Void, Boolean>  {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}		
-		
+		}
+
 		return retorno;
 	}
 
@@ -155,12 +173,12 @@ class OperacaoTask extends AsyncTask<Void, Void, Boolean>  {
 	@Override
 	protected void onPostExecute(Boolean ok) {
 		dialog.dismiss();
-		if(ok){
+		if (ok) {
 			Intent i = new Intent(context, CategoriasActivity.class);
 			context.startActivity(i);
-		}
-		else{
-			Toast.makeText(context, "Email/Senha Incorretos.", Toast.LENGTH_SHORT).show();
+		} else {
+			Toast.makeText(context, "Email/Senha Incorretos.",
+					Toast.LENGTH_SHORT).show();
 		}
 	}
 }
