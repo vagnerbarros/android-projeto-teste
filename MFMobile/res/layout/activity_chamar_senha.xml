@@ -1,8 +1,10 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#E6E7E8"
+    android:orientation="vertical"
     android:padding="0dp"
     tools:context=".ChamarSenhaActivity" >
 
@@ -10,7 +12,6 @@
         android:id="@+id/relativeLayout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:background="#0B89C4" >
 
         <ImageView
@@ -29,253 +30,101 @@
             android:src="@drawable/logo_topo" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_atualizar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout1"
-        android:background="#FFFFFF"
+        android:padding="10dp"
+        android:background="#FFFFFF" >
+
+        <TextView
+            android:id="@+id/txtDescri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_nome_estab" />
+
+        <TextView
+            android:id="@+id/txt_estabelecimento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:padding="10dp" >
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/lbl_sua_senha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:text="@string/lbl_sua_senha" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp" >
+        <TextView
+            android:id="@+id/txt_sua_senha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right" />
+        
+    </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/textView2"
-                    android:padding="5dp"
-                    android:text="Caruaru - PE" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/textView1"
-                    android:layout_alignBottom="@+id/textView1"
-                    android:layout_alignParentRight="true"
-                    android:background="@drawable/txt_link_bg"
-                    android:clickable="true"
-                    android:padding="5dp"
-                    android:text="Alterar Cidade"
-                    android:textColor="@drawable/txt_link_main" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp" >
-
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/textView2"
-                    android:padding="5dp"
-                    android:text="Agências Bancárias" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/textView1"
-                    android:layout_alignBottom="@+id/textView1"
-                    android:layout_alignParentRight="true"
-                    android:background="@drawable/txt_link_bg"
-                    android:clickable="true"
-                    android:padding="5dp"
-                    android:text="Alterar Categoria"
-                    android:textColor="@drawable/txt_link_main" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp" >
-
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/textView2"
-                    android:padding="5dp"
-                    android:text="Nome do Estabelecimento" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/textView1"
-                    android:layout_alignBottom="@+id/textView1"
-                    android:layout_alignParentRight="true"
-                    android:background="@drawable/txt_link_bg"
-                    android:clickable="true"
-                    android:padding="5dp"
-                    android:text="Alterar Estabelecimento"
-                    android:textColor="@drawable/txt_link_main" />
-            </RelativeLayout>
-        </LinearLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout3"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/TextView05"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout2" >
+        android:text="@string/lbl_ultimas_chamadas"
+        android:padding="10dp" />
 
-        <LinearLayout
+    <ListView
+        android:id="@+id/list_historico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/TextView05"
+        android:padding="10dp" >
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/lbl_estima"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:orientation="vertical" >
+            android:text="@string/lbl_estimativa" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="82dp"
-                android:layout_weight="10" >
+        <TextView
+            android:id="@+id/txt_estimativa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                <ScrollView
-                    android:id="@+id/scrollView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true" >
+    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF" >
 
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="10dp" >
+        <Button
+            android:id="@+id/btSolicitarSenha"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:background="@drawable/bt_senha"
+            android:padding="15dp"
+            android:text="@string/txtSolicitarSenha"
+            android:textColor="#FEFEFE" />
 
-                            <TextView
-                                android:id="@+id/TextView05"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:layout_centerVertical="true"
-                                android:text="Última Chamada:" />
+    </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/textView3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_alignParentTop="true"
-                                android:text="000"
-                                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                        </RelativeLayout>
-                        
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="10dp" >
-
-                            <TextView
-                                android:id="@+id/TextView05"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:layout_centerVertical="true"
-                                android:text="Sua Senha:" />
-
-                            <TextView
-                                android:id="@+id/textView3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_alignParentTop="true"
-                                android:text="000"
-                                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                        </RelativeLayout>
-                        
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="10dp" >
-
-                            <TextView
-                                android:id="@+id/TextView05"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:layout_centerVertical="true"
-                                android:text="Estimativa de Atendimento:" />
-
-                            <TextView
-                                android:id="@+id/textView3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_alignParentTop="true"
-                                android:text="000"
-                                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                        </RelativeLayout>
-                        
-                    </LinearLayout>
-                </ScrollView>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="82dp"
-                android:layout_weight="1" >
-
-                <Button
-                    android:id="@+id/btSolicitarSenha"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_margin="16dp"
-                    android:background="@drawable/bt_senha"
-                    android:padding="15dp"
-                    android:text="@string/txtSolicitarSenha"
-                    android:textColor="#FEFEFE" />
-            </RelativeLayout>
-        </LinearLayout>
-    </RelativeLayout>
-
-</RelativeLayout>
+</LinearLayout>

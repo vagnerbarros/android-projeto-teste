@@ -1,15 +1,7 @@
 package com.master.android.activity;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -21,7 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.master.android.R;
+import com.master.android.entidade.Usuario;
+import com.master.android.util.Constantes;
 import com.master.android.util.Criptografia;
+import com.master.android.util.RequisicaoWeb;
+import com.master.android.util.Sessao;
 
 public class LoginActivity extends Activity implements OnClickListener {
 
@@ -53,15 +49,9 @@ public class LoginActivity extends Activity implements OnClickListener {
 		txtEmail = (EditText) findViewById(R.id.txtEmailRecuperacao);
 		txtSenha = (EditText) findViewById(R.id.txtSenha);
 		
-	}
-
-	public void abrirMenu(View v) {
-		// // Se estive aberto, feche. Senão abra.
-		// if (mSlidingLayout.isOpen()) {
-		// mSlidingLayout.closePane();
-		// } else {
-		// mSlidingLayout.openPane();
-		// }
+		txtEmail.setText("email");
+		txtSenha.setText("senha");
+		
 	}
 
 	@Override
@@ -77,8 +67,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 			startActivityForResult(i, CADASTRAR);
 
 		} else if (v.getId() == R.id.textViewEsqueciSenha) {
-			Intent i = new Intent(LoginActivity.this,
-					RecuperarSenhaActivity.class);
+			Intent i = new Intent(LoginActivity.this, RecuperarSenhaActivity.class);
 			startActivityForResult(i, RECUPERAR);
 
 		} else if (v.getId() == R.id.btConectar) {
@@ -91,12 +80,16 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 		if (resultCode == RESULT_OK) {
 			if (requestCode == RECUPERAR) {
-				Toast.makeText(this,
-						"Uma nova senha foi enviada para seu e-mail",
-						Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "Uma nova senha foi enviada para seu e-mail", Toast.LENGTH_LONG).show();
 			} else if (requestCode == CADASTRAR) {
-				Toast.makeText(this, "Agora você já pode logar",
-						Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "Agora você já pode logar", Toast.LENGTH_LONG).show();
+			}
+		}
+		else if(resultCode == RESULT_CANCELED){
+			if (requestCode == RECUPERAR) {
+				Toast.makeText(this, "Erro durante a recuperação de senha.", Toast.LENGTH_LONG).show();
+			} else if (requestCode == CADASTRAR) {
+				Toast.makeText(this, "Erro ao tentar cadastrar", Toast.LENGTH_LONG).show();
 			}
 		}
 	}
@@ -105,80 +98,17 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 		String email = txtEmail.getText().toString();
 		String senha = txtSenha.getText().toString();
+		
+		Usuario u = new Usuario();
+		u.setLogin(email);
+		u.setSenha(senha);
+		Sessao.logar(u);
 
-		OperacaoTask op = new OperacaoTask(this, email, senha);
-		op.execute();
+		String consulta = "login=" + email + "&senha=" + Criptografia.encryptPassword(senha);
+		String link = Constantes.SERVIDOR + "acao=logar_android&" + consulta;
+		
+		RequisicaoWeb req = new RequisicaoWeb(this, new Intent(this, EstabelecimentosActivity.class));
+		req.execute(link);
 	}
 
-}
-
-class OperacaoTask extends AsyncTask<Void, Void, Boolean> {
-	
-	private ProgressDialog dialog;
-	private Context context;
-	private String email;
-	private String senha;
-
-	public OperacaoTask(Context context, String e, String s) {
-		this.context = context;
-		this.email = e;
-		this.senha = s;
-	}
-
-	@Override
-	protected void onPreExecute() {
-		dialog = new ProgressDialog(context);
-		dialog.setMessage("Aguarde...");
-		dialog.show();
-	}
-
-	@Override
-	protected Boolean doInBackground(Void... params) {
-
-		String consulta = "login=" + email + "&senha="
-				+ Criptografia.encryptPassword(senha);
-		String link = "http://10.0.2.2:8080/MasterFila/controlador?acao=logar_android&"
-				+ consulta;
-		Boolean retorno = false;
-		try {
-
-			URL url = new URL(link);
-			HttpURLConnection conexao = (HttpURLConnection) url
-					.openConnection();
-
-			conexao.setDoOutput(false);
-			conexao.setDoInput(true);
-			conexao.setRequestMethod("GET");
-
-			if (conexao.getResponseCode() == HttpURLConnection.HTTP_OK) {
-				retorno = true;
-			} else {
-				retorno = false;
-			}
-
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return retorno;
-	}
-
-	@Override
-	protected void onProgressUpdate(Void... values) {
-		dialog.setMessage("Aguarde ...");
-	}
-
-	@Override
-	protected void onPostExecute(Boolean ok) {
-		dialog.dismiss();
-		if (ok) {
-			Intent i = new Intent(context, CategoriasActivity.class);
-			context.startActivity(i);
-		} else {
-			Toast.makeText(context, "Email/Senha Incorretos.",
-					Toast.LENGTH_SHORT).show();
-		}
-	}
 }
