@@ -23,6 +23,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.master.android.R;
+import com.master.android.util.Constantes;
+import com.master.android.util.RequisicaoWeb;
 
 @SuppressLint("NewApi")
 public class CadastroActivity extends Activity implements OnClickListener {
@@ -85,82 +87,16 @@ public class CadastroActivity extends Activity implements OnClickListener {
 			try {
 				usuario.put("nome", nome);
 				usuario.put("cpf", cpf);
-				usuario.put("email", email);
+				usuario.put("login", email);
 				usuario.put("senha", senha);
 				
-				String link = "http://10.0.2.2:8080/MasterFila/controlador?acao=cadastrar&json=" + usuario;
-				OperacaoCadastrar op = new OperacaoCadastrar(this, link);
-				op.execute();
-				finish();
+				String link = Constantes.SERVIDOR + "acao=cadastrar&json=" + usuario;
+				RequisicaoWeb req = new RequisicaoWeb(this);
+				req.execute(link);
+				
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 		}
-	}
-	
-}
-
-class OperacaoCadastrar extends AsyncTask<Void, Void, Boolean>  {
-	
-	private ProgressDialog dialog;
-	private Context context;
-	private String link;
-
-	public OperacaoCadastrar(Context context, String l) {
-		this.context = context;
-		this.link = l;
-	}
-
-	@Override
-	protected void onPreExecute() {
-		dialog = new ProgressDialog(context);
-		dialog.setMessage("Aguarde...");
-		dialog.show();
-	}
-
-	@Override
-	protected Boolean doInBackground(Void... params) {
-
-		Boolean retorno = false;
-		try{
-
-			URL url = new URL(link);
-			HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
-
-			conexao.setDoOutput(false);
-			conexao.setDoInput(true);
-			conexao.setRequestMethod("GET");
-
-			if(conexao.getResponseCode() == HttpURLConnection.HTTP_OK){
-				retorno = true;
-			}
-			else{
-				retorno = false;
-			}
-
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}		
-		
-		return retorno;
-	}
-
-	@Override
-	protected void onProgressUpdate(Void... values) {
-		dialog.setMessage("Aguarde ...");
-	}
-
-	@Override
-	protected void onPostExecute(Boolean ok) {
-		dialog.dismiss();
-		if(ok){
-			Toast.makeText(context, "Cadastrado com Sucesso.", Toast.LENGTH_SHORT).show();
-			((Activity)context).setResult(Activity.RESULT_OK);
-		}
-		else{
-			Toast.makeText(context, "Erro ao Tentar Cadastrar", Toast.LENGTH_SHORT).show();
-		}
-	}
+	}	
 }

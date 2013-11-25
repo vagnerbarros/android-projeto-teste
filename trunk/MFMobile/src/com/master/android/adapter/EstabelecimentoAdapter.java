@@ -11,8 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.master.android.R;
-import com.master.android.dominio.Categoria;
-import com.master.android.dominio.Estabelecimento;
+import com.master.android.entidade.Estabelecimento;
 
 public class EstabelecimentoAdapter extends BaseAdapter{
 

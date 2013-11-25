@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.master.android.R;
+import com.master.android.util.Constantes;
+import com.master.android.util.RequisicaoWeb;
 
 public class RecuperarSenhaActivity extends Activity implements OnClickListener {
 	
@@ -45,8 +47,7 @@ public class RecuperarSenhaActivity extends Activity implements OnClickListener 
 	public void onClick(View v) {
 		if(v.getId() == R.id.btRecuperar){
 			if(!txtEmail.getText().toString().equals("")){
-				setResult(RESULT_OK);
-				finish();
+				recuperar();
 			}
 			else{
 				Toast.makeText(this, "Preencha o e-mail.", Toast.LENGTH_SHORT).show();
@@ -55,5 +56,13 @@ public class RecuperarSenhaActivity extends Activity implements OnClickListener 
 			finish();
 		}
 	}
-
+	
+	private void recuperar(){
+		
+		String consulta = "email=" + txtEmail.getText().toString(); 
+		String link = Constantes.SERVIDOR + "acao=recuperar_senha&" + consulta;
+		
+		RequisicaoWeb req = new RequisicaoWeb(this);
+		req.execute(link);
+	}
 }

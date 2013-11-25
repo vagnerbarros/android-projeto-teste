@@ -32,5 +32,20 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_sliding_panel_layout">SlidingPanelLayout</string>
     <string name="alterarCategoria">Alterar Categoria</string>
+    <string name="alterarCidade">Alterar Cidade</string>
+    <string name="lbl_nome_estab">Nome do Estabelecimento: </string>
+    <string name="lbl_sua_senha">Sua Senha: </string>
+    <string name="lbl_ultimas_chamadas">Últimas Chamadas: </string>
+    <string name="lbl_estimativa">Estimativa de Atendimento: </string>
+    <string name="txt_selecione_categoria">Categoria</string>
+    <string name="txt_selecione_cidade">Cidade</string>
+    
+    <string-array name="categorias">
+        <item>Consultórios Médicos</item>
+        <item>Repartições Públicas</item>
+        <item>Agências Bancárias</item>
+        <item>Cartórios</item>
+        <item>Prefeitura e setores vinculados</item>
+    </string-array>
     
 </resources>
