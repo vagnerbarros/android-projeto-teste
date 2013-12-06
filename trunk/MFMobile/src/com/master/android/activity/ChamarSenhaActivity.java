@@ -235,10 +235,14 @@ public class ChamarSenhaActivity extends Activity implements OnClickListener {
 						int estimativa = tempoMedia * (posicao - 1);
 						txtEstimativa.setVisibility(View.VISIBLE);
 						txtEstimativa.setText(estimativa + " Minutos.");
+						lblEstimativa.setVisibility(View.VISIBLE);
 					}
 				}
 				if(posicao == 0){
 					btnSolicitar.setVisibility(View.VISIBLE);
+				}
+				else{
+					btnSolicitar.setVisibility(View.INVISIBLE);
 				}
 			}
 			else{

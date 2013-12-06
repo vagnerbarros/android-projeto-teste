@@ -28,6 +28,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 	private EditText txtSenha;
 	private Button btCriarConta;
 	private Button btConectar;
+	private Button btAcessoDireto;
 	private TextView txBtEsqueciSenha;
 
 	@Override
@@ -45,6 +46,9 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 		btConectar = (Button) findViewById(R.id.btConectar);
 		btConectar.setOnClickListener(this);
+		
+		btAcessoDireto = (Button) findViewById(R.id.btn_acesso_direto);
+		btAcessoDireto.setOnClickListener(this);
 
 		txtEmail = (EditText) findViewById(R.id.txtEmailRecuperacao);
 		txtSenha = (EditText) findViewById(R.id.txtSenha);
@@ -72,6 +76,10 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 		} else if (v.getId() == R.id.btConectar) {
 			logar();
+		}
+		else if(v.getId() == R.id.btn_acesso_direto){
+			Sessao.deslogar();
+			startActivity(new Intent(this, EstabelecimentosActivity.class));
 		}
 	}
 
