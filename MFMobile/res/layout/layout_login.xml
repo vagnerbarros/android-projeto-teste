@@ -91,9 +91,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:background="@drawable/bt_bottom"
-        android:text="@string/txt_crie_conta"
+        android:gravity="center"
         android:padding="20dp"
-        android:gravity="left"
+        android:text="@string/txt_crie_conta"
         android:textColor="#FEFEFE" />
 
     <ImageView
@@ -105,5 +105,16 @@
         android:layout_alignTop="@+id/btCriarConta"
         android:contentDescription="@string/iconNext"
         android:src="@drawable/icon_bt_avancar" />
+
+    <Button
+        android:id="@+id/btn_acesso_direto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btCriarConta"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/bt_bottom"
+        android:text="@string/lbl_acessar_sem_logar"
+        android:textColor="#FEFEFE" />
     
 </RelativeLayout>

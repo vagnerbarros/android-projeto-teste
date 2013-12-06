@@ -39,6 +39,7 @@
     <string name="lbl_estimativa">Estimativa de Atendimento: </string>
     <string name="txt_selecione_categoria">Categoria</string>
     <string name="txt_selecione_cidade">Cidade</string>
+    <string name="lbl_acessar_sem_logar">Acesso Simples</string>
     
     <string-array name="categorias">
         <item>Consultórios Médicos</item>
